@@ -4,6 +4,10 @@ import (
 	"AdventOfCode/2024/day1"
 	"AdventOfCode/2024/day10"
 	"AdventOfCode/2024/day11"
+	"AdventOfCode/2024/day12"
+	"AdventOfCode/2024/day13"
+	"AdventOfCode/2024/day14"
+	"AdventOfCode/2024/day15"
 	"AdventOfCode/2024/day2"
 	"AdventOfCode/2024/day3"
 	"AdventOfCode/2024/day4"
@@ -141,6 +145,46 @@ func main() {
 			day11.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day11.Part2(inputSrc)
+		}
+		break
+	case 12:
+		if *test {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
+			day12.Part1(inputSrc)
+		} else if *partNum == 2 {
+			day12.Part2(inputSrc)
+		}
+		break
+	case 13:
+		if *test {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
+			day13.Part1(inputSrc)
+		} else if *partNum == 2 {
+			day13.Part2(inputSrc)
+		}
+		break
+	case 14:
+		if *test {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
+			day14.Part1(inputSrc)
+		} else if *partNum == 2 {
+			day14.Part2(inputSrc)
+		}
+		break
+	case 15:
+		if *test {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
+			day15.Part1(inputSrc)
+		} else if *partNum == 2 {
+			day15.Part2(inputSrc)
 		}
 		break
 	default:
