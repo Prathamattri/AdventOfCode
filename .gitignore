@@ -1,3 +1,4 @@
 AdventOfCode
-/input.txt
+**/*.sh
+**/input.txt
 

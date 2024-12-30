@@ -43,10 +43,10 @@ func main() {
 	testInputSrc := "./" + strconv.Itoa(*year) + "/day" + strconv.Itoa(*day) + "/test_input.txt"
 	switch *day {
 	case 1:
-		fmt.Println(inputSrc)
 		if *test {
-			day1.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day1.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day1.Part2(inputSrc)
@@ -54,8 +54,9 @@ func main() {
 		break
 	case 2:
 		if *test {
-			day2.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day2.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day2.Part2(inputSrc)
@@ -63,8 +64,9 @@ func main() {
 		break
 	case 3:
 		if *test {
-			day3.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day3.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day3.Part2(inputSrc)
@@ -72,8 +74,9 @@ func main() {
 		break
 	case 4:
 		if *test {
-			day4.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day4.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day4.Part2(inputSrc)
@@ -81,8 +84,9 @@ func main() {
 		break
 	case 5:
 		if *test {
-			day5.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day5.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day5.Part2(inputSrc)
@@ -90,8 +94,9 @@ func main() {
 		break
 	case 6:
 		if *test {
-			day6.Test(testInputSrc)
-		} else if *partNum == 1 {
+			inputSrc = testInputSrc
+		}
+		if *partNum == 1 {
 			day6.Part1(inputSrc)
 		} else if *partNum == 2 {
 			day6.Part2(inputSrc)

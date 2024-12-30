@@ -8,11 +8,6 @@ import (
 	"strings"
 )
 
-type pQueue struct {
-	num      int
-	priority int
-}
-
 func isElementIn(elem int, slice []int) bool {
 	for _, num := range slice {
 		if elem == num {
@@ -27,7 +22,6 @@ func processInput(fileSrc string) (map[int][]int, [][]int) {
 	if err != nil {
 		panic("Error while reading input file")
 	}
-
 	fileString := string(fileBytes)
 	// Breaking lines from newline character into array of strings
 	//The rules are divided from printing order by an empty line
@@ -44,11 +38,10 @@ func processInput(fileSrc string) (map[int][]int, [][]int) {
 		parts := strings.Split(pair, "|")
 		num1, _ := strconv.Atoi(parts[0])
 		num2, _ := strconv.Atoi(parts[1])
-		rules_map[num2] = append(rules_map[num2], num1)
+		rules_map[num1] = append(rules_map[num1], num2)
 	}
-	for num, rules := range rules_map {
+	for _, rules := range rules_map {
 		slices.Sort(rules)
-		fmt.Printf("%d : %v\n", num, rules)
 	}
 
 	printingOrderArray := [][]int{}
@@ -64,48 +57,31 @@ func processInput(fileSrc string) (map[int][]int, [][]int) {
 			printingOrderArray = append(printingOrderArray, temp_int_list)
 		}
 	}
+
 	return rules_map, printingOrderArray
 }
 
 func Part1(fileSrc string) int {
 	rules_map, printingOrderArray := processInput(fileSrc)
 
-	// Creating a priority list based on rules_map
-	priority_list := []int{}
-	for key, less_priority_elements := range rules_map {
-		index := 0
-		for ind, element := range priority_list {
-			if isElementIn(element, less_priority_elements) {
-				// means that element is of less priority than the key
-				index = ind
-				break
-			} else {
-				index = ind + 1
-			}
-		}
-		priority_list = slices.Insert(priority_list, index, key)
-	}
-	priority_map := make(map[int]int)
-	for index, element := range priority_list {
-		priority_map[element] = len(priority_list) - index
-	}
-	// if any page is not present while checking the pages order inside the priority_list
-	// it automatically has the least priority
-
-	fmt.Println(priority_map)
 	middle_term_sum := 0
 	for _, order := range printingOrderArray {
-		most_recent_priority := priority_map[order[0]]
+		order_len := len(order)
 		isValid := true
-		for _, page_num := range order {
-			priority, _ := priority_map[page_num]
-			if priority > most_recent_priority {
-				isValid = false
+		for i := order_len - 1; i >= 1; i-- {
+			key := order[i]
+			for j := i - 1; j >= 0; j-- {
+				_, isPresent := slices.BinarySearch(rules_map[key], order[j])
+				if isPresent {
+					isValid = false
+					break
+				}
+			}
+			if !isValid {
 				break
-			} else {
-				most_recent_priority = priority
 			}
 		}
+
 		if isValid {
 			var mid_index int = len(order) / 2
 			middle_term_sum += order[mid_index]
@@ -115,5 +91,36 @@ func Part1(fileSrc string) int {
 	return middle_term_sum
 }
 func Part2(fileSrc string) {
+	rules_map, printOrderArray := processInput(fileSrc)
 
+	middle_term_sum := 0
+	for order_ind, order := range printOrderArray {
+		order_len := len(order)
+		isValid := true
+		for i := order_len - 1; i > 0; i-- {
+			for j := i - 1; j >= 0; j-- {
+				key := printOrderArray[order_ind][i]
+				if _, ok := rules_map[key]; !ok {
+					fmt.Println(key)
+					break
+				}
+				_, isPresent := slices.BinarySearch(rules_map[key], printOrderArray[order_ind][j])
+				if isPresent {
+					isValid = false
+					for k := j; k < i; k++ {
+						temp := order[k]
+						printOrderArray[order_ind][k] = printOrderArray[order_ind][k+1]
+						printOrderArray[order_ind][k+1] = temp
+					}
+					j = i
+				}
+			}
+		}
+		if !isValid {
+			var mid_index int = order_len / 2
+			middle_term_sum += printOrderArray[order_ind][mid_index]
+		}
+	}
+
+	fmt.Println(middle_term_sum)
 }
