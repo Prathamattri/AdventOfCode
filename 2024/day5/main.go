@@ -101,7 +101,6 @@ func Part2(fileSrc string) {
 			for j := i - 1; j >= 0; j-- {
 				key := printOrderArray[order_ind][i]
 				if _, ok := rules_map[key]; !ok {
-					fmt.Println(key)
 					break
 				}
 				_, isPresent := slices.BinarySearch(rules_map[key], printOrderArray[order_ind][j])

@@ -2,7 +2,7 @@
 Gamified version of leetcode type problems, got to know about it in 2024. Really an interesting way to spend time and getting familiar with the usage, syntax, modules/packages of a programming language. Will try a different language every year.
 This codebase might also change later so let's see.
 
-### Years
+### Year
 - 2024 ( GOLANG )
 
 ### How to Build
@@ -18,10 +18,10 @@ go build
 ### How to use
 
 ```bash
-AdventOfCode -y [year] -d [day num] -p [part number]
+./AdventOfCode -y [year] -d [day num] -p [part number] -f [path to input file]
 ```
 
 ### When confused, get some help
 ```bash
-AdventOfCode -h
+./AdventOfCode -h
 ```
